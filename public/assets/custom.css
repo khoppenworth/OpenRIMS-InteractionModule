@@ -1,0 +1,75 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.main-sidebar, .main-header {
+    border-radius: 1rem;
+    margin: 0.75rem;
+}
+
+.navbar-white {
+    background-color: #ffffff !important;
+    border-bottom: 3px solid #c29100;
+}
+
+[class*=sidebar-dark-] .sidebar a {
+    color: #3c3c3c;
+}
+
+[class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link {
+    background: transparent;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: #c29100;
+    color: #ffffff;
+}
+
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #c29100;
+    border-color: #c29100;
+    color: #1f1f1f;
+}
+
+.card {
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.table thead th {
+    border-top: none;
+    font-weight: 600;
+    color: #444444;
+}
+
+.table tbody tr {
+    border-radius: 0.75rem;
+}
+
+.badge-severity-major {
+    background-color: #b70000;
+}
+
+.badge-severity-moderate {
+    background-color: #ffb703;
+    color: #222222;
+}
+
+.badge-severity-minor {
+    background-color: #7cb342;
+}
+
+.table-responsive {
+    border-radius: 0.75rem;
+}
+
+.footer-dark {
+    background: #ffffff;
+    border-top: 3px solid #c29100;
+    border-radius: 0.75rem;
+    color: #555555;
+}
