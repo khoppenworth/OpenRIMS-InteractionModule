@@ -1,0 +1,126 @@
+body {
+    background-color: #f4f6f9;
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root {
+    --pantone-294: #003A70;
+    --pantone-200: #BA0C2F;
+}
+
+.main-header {
+    background-color: #ffffff !important;
+    border-bottom: 4px solid var(--pantone-294);
+    margin: 0.75rem 0.75rem 0;
+    border-radius: 0.85rem;
+}
+
+.main-sidebar {
+    background: linear-gradient(180deg, var(--pantone-294) 0%, #012f57 100%);
+}
+
+.brand-link {
+    border-bottom: none !important;
+}
+
+.brand-text {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active:hover {
+    background-color: var(--pantone-200);
+    color: #ffffff;
+    border-radius: 0.5rem;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: 0.5rem;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.sidebar-dark-primary .nav-sidebar .nav-link i {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar-dark-primary .nav-header {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.btn-accent,
+.btn-accent:hover,
+.btn-accent:focus {
+    background-color: var(--pantone-200);
+    border-color: var(--pantone-200);
+    color: #ffffff;
+}
+
+.card {
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.table thead th {
+    border-top: none;
+    font-weight: 600;
+    color: #444444;
+}
+
+.table tbody tr {
+    border-radius: 0.75rem;
+}
+
+.badge-severity-major {
+    background-color: #b70000;
+}
+
+.badge-severity-moderate {
+    background-color: #ffb703;
+    color: #222222;
+}
+
+.badge-severity-minor {
+    background-color: #7cb342;
+}
+
+.table-responsive {
+    border-radius: 0.75rem;
+}
+
+.footer-dark {
+    background: #ffffff;
+    border-top: 4px solid var(--pantone-200);
+    border-radius: 0.75rem;
+    color: #555555;
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, rgba(0, 58, 112, 0.95), rgba(186, 12, 47, 0.85));
+    color: #ffffff;
+    border-radius: 1rem;
+}
+
+.link-accent {
+    color: var(--pantone-200);
+}
+
+.link-accent:hover {
+    color: #8a0923;
+}
+
+.card-outline.card-primary {
+    border-top: 4px solid var(--pantone-200);
+}
+
+.login-page .login-logo a {
+    color: var(--pantone-294);
+}
