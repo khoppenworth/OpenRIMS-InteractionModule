@@ -5,6 +5,7 @@ require __DIR__ . '/../app/bootstrap.php';
 $auth = new Auth($pdo);
 if (!$auth->hasRole('admin')) {
     set_flash('danger', $translator->trans('auth_import_only'));
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
 }
@@ -193,3 +194,21 @@ $currentPage = 'import';
 </script>
 </body>
 </html>
+$repository = new InteractionRepository($pdo);
+$service = new InteractionService($repository);
+
+if (empty($_FILES['file']['tmp_name'])) {
+    set_flash('danger', $translator->trans('import_error', ['message' => 'No file uploaded']));
+    header('Location: index.php');
+    exit;
+}
+
+try {
+    $count = $service->importCsv($_FILES['file']['tmp_name']);
+    set_flash('success', $translator->trans('import_success', ['count' => $count]));
+} catch (Throwable $exception) {
+    set_flash('danger', $translator->trans('import_error', ['message' => $exception->getMessage()]));
+}
+
+header('Location: index.php');
+exit;

@@ -9,6 +9,9 @@ A lightweight LAMP-ready drug interaction knowledge base inspired by [interaktio
 - Drug interaction registry stored in MySQL with ATC classification metadata.
 - Role-based access control with secure login (public view, staff export, admin import) and bilingual interface.
 - CSV import/export workflows for bulk maintenance of interaction pairs (admin import, staff/export access).
+- AdminLTE 3.2 white theme with rounded cards and dark-yellow accents optimized for clinical readability.
+- Drug interaction registry stored in MySQL with ATC classification metadata.
+- CSV import/export workflows for bulk maintenance of interaction pairs.
 - FHIR `Bundle` endpoint composed of `MedicationKnowledge` resources for system-to-system exchange.
 - Sample dataset aligned with ATC coding to bootstrap deployments.
 
@@ -56,6 +59,10 @@ Administrators can create additional users directly in the `users` table.
 
 - **CSV Export:** `GET /export.php` (requires staff or administrator sign-in; respects `query` and `severity` filters).
 - **CSV Import:** `POST /import.php` (administrator sign-in required) with `multipart/form-data` containing a `file` field. Required headers: `drug_a_name, drug_a_atc, drug_b_name, drug_b_atc, severity, description, clinical_management, evidence_level, source_url`.
+## Data Exchange
+
+- **CSV Export:** `GET /export.php` (respects `query` and `severity` filters).
+- **CSV Import:** `POST /import.php` with `multipart/form-data` containing a `file` field. Required headers: `drug_a_name, drug_a_atc, drug_b_name, drug_b_atc, severity, description, clinical_management, evidence_level, source_url`.
 - **FHIR Bundle:** `GET /api/fhir/bundle.php` returns an `application/fhir+json` bundle of `MedicationKnowledge` resources.
 
 ## Development Notes

@@ -68,6 +68,11 @@ function severity_badge(string $severity): string
                     <i class="fas fa-user-shield mr-1 text-secondary"></i><?= e($translator->trans('welcome_user', ['name' => $user['name'], 'role' => $roleLabel])); ?>
                 </li>
             <?php endif; ?>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="index.php" class="nav-link text-bold"><i class="fas fa-notes-medical mr-2"></i><?= e($translator->trans('app_title')); ?></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-language mr-1"></i><?= e($translator->trans('language')); ?></a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -182,6 +187,29 @@ function severity_badge(string $severity): string
                         </div>
                     </div>
                 <?php endif; ?>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="h3 text-bold mb-2"><?= e($translator->trans('app_title')); ?></h1>
+                                <p class="text-muted mb-0"><?= e($translator->trans('tagline')); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body">
+                                <h2 class="h5 text-bold"><i class="fas fa-exchange-alt mr-2"></i><?= e($translator->trans('manage_data')); ?></h2>
+                                <p class="mb-3"><?= e($translator->trans('table_hint')); ?></p>
+                                <div class="d-flex flex-wrap" style="gap:0.5rem;">
+                                    <a class="btn btn-sm btn-outline-dark" href="export.php?<?= http_build_query(array_filter($filters)); ?>" title="<?= e($translator->trans('export')); ?>"><i class="fas fa-file-export mr-1"></i><?= e($translator->trans('export')); ?></a>
+                                    <button class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import mr-1"></i><?= e($translator->trans('import')); ?></button>
+                                    <a class="btn btn-sm btn-outline-dark" href="api/fhir/bundle.php?<?= http_build_query(array_filter($filters)); ?>" target="_blank"><i class="fas fa-share-alt mr-1"></i><?= e($translator->trans('download_fhir')); ?></a>
+                                </div>
+                                <p class="mt-2 mb-0"><i class="fas fa-link mr-1"></i><?= e($translator->trans('fhir_endpoint')); ?>: <code>/api/fhir/bundle.php</code></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <?php if ($flash): ?>
                     <div class="alert alert-<?= e($flash['type']); ?> alert-dismissible fade show">
@@ -199,6 +227,12 @@ function severity_badge(string $severity): string
                                 <input type="text" class="form-control" name="query" value="<?= e($filters['query']); ?>" placeholder="<?= e($translator->trans('search_placeholder')); ?>">
                                 <div class="input-group-append">
                                     <button class="btn btn-accent" type="submit"><i class="fas fa-search"></i></button>
+                    <div class="card-header border-0">
+                        <form class="form-inline" method="get">
+                            <div class="input-group mr-2 flex-grow-1">
+                                <input type="text" class="form-control" name="query" value="<?= e($filters['query']); ?>" placeholder="<?= e($translator->trans('search_placeholder')); ?>">
+                                <div class="input-group-append">
+                                    <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                             <div class="form-group mr-2">
@@ -224,6 +258,8 @@ function severity_badge(string $severity): string
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
+                            <a class="btn btn-outline-secondary" href="index.php">Reset</a>
+                        </form>
                     </div>
                     <div class="card-body">
                         <?php if (!$interactions): ?>
@@ -261,6 +297,7 @@ function severity_badge(string $severity): string
                                                 <td>
                                                     <?php if (!empty($interaction['source_url'])): ?>
                                                         <a href="<?= e($interaction['source_url']); ?>" target="_blank" rel="noopener" class="link-accent"><?= e(parse_url($interaction['source_url'], PHP_URL_HOST) ?: $interaction['source_url']); ?></a>
+                                                        <a href="<?= e($interaction['source_url']); ?>" target="_blank" rel="noopener" class="text-warning"><?= e(parse_url($interaction['source_url'], PHP_URL_HOST) ?: $interaction['source_url']); ?></a>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -283,5 +320,39 @@ function severity_badge(string $severity): string
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="post" action="import.php" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-file-import mr-2"></i><?= e($translator->trans('upload_csv')); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?= e($translator->trans('import_instructions')); ?></p>
+                <div class="form-group">
+                    <label class="btn btn-block btn-outline-secondary">
+                        <input type="file" name="file" accept=".csv" class="d-none" required>
+                        <span><i class="fas fa-upload mr-2"></i><?= e($translator->trans('choose_file')); ?></span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><?= e($translator->trans('cancel')); ?></button>
+                <button type="submit" class="btn btn-warning"><?= e($translator->trans('submit')); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 </body>
 </html>
