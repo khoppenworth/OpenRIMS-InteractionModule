@@ -2,6 +2,13 @@
 session_start();
 require __DIR__ . '/../app/bootstrap.php';
 
+$auth = new Auth($pdo);
+if (!$auth->hasRole('staff', 'admin')) {
+    set_flash('danger', $translator->trans('auth_export_only'));
+    header('Location: index.php');
+    exit;
+}
+
 $repository = new InteractionRepository($pdo);
 $service = new InteractionService($repository);
 

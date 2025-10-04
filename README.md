@@ -5,6 +5,10 @@ A lightweight LAMP-ready drug interaction knowledge base inspired by [interaktio
 ## Features
 
 - 🇬🇧/🇫🇷 bilingual interface (English and French) with simple locale switching.
+- AdminLTE 3.2 layout themed with PANTONE® 294 and PANTONE® 200 accents, rounded components, and left-hand navigation.
+- Drug interaction registry stored in MySQL with ATC classification metadata.
+- Role-based access control with secure login (public view, staff export, admin import) and bilingual interface.
+- CSV import/export workflows for bulk maintenance of interaction pairs (admin import, staff/export access).
 - AdminLTE 3.2 white theme with rounded cards and dark-yellow accents optimized for clinical readability.
 - Drug interaction registry stored in MySQL with ATC classification metadata.
 - CSV import/export workflows for bulk maintenance of interaction pairs.
@@ -41,6 +45,20 @@ A lightweight LAMP-ready drug interaction knowledge base inspired by [interaktio
    ```
 5. Visit the site in a browser. Use the language selector in the header to switch between English and French.
 
+### Default access accounts
+
+| Role | Email | Password | Capabilities |
+| --- | --- | --- | --- |
+| Administrator | `admin@example.com` | `Admin123!` | View, export, import |
+| Staff | `staff@example.com` | `Staff123!` | View, export |
+| Public | – | – | View only |
+
+Administrators can create additional users directly in the `users` table.
+
+## Data Exchange
+
+- **CSV Export:** `GET /export.php` (requires staff or administrator sign-in; respects `query` and `severity` filters).
+- **CSV Import:** `POST /import.php` (administrator sign-in required) with `multipart/form-data` containing a `file` field. Required headers: `drug_a_name, drug_a_atc, drug_b_name, drug_b_atc, severity, description, clinical_management, evidence_level, source_url`.
 ## Data Exchange
 
 - **CSV Export:** `GET /export.php` (respects `query` and `severity` filters).

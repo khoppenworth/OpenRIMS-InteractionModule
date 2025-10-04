@@ -19,6 +19,7 @@ try {
 }
 
 require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/Auth.php';
 require_once __DIR__ . '/InteractionRepository.php';
 require_once __DIR__ . '/InteractionService.php';
 
